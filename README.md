@@ -1,3 +1,6 @@
+# 🚧Work In Progress🚧
+
+
 # AutoFill Chrome Extension
 
 A Chrome extension that automatically fills forms with realistic dummy data, including temporary Gmail addresses from Gmailnator API.
@@ -20,6 +23,15 @@ A Chrome extension that automatically fills forms with realistic dummy data, inc
 3. Enable "Developer mode"
 4. Click "Load unpacked"
 5. Select the project directory
+
+## API Key Setup
+
+1. Open `setup.html` in your browser
+2. Enter your RapidAPI key
+3. Click "Save Key"
+4. The key will be securely stored in Chrome's sync storage
+
+Note: You need to configure the API key before the email generation will work.
 
 ## Usage
 

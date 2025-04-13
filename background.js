@@ -1,11 +1,17 @@
 // Fake data generator
 class FakeData {
   static async getEmail() {
+    // Get API key from secure storage
+    const {rapidApiKey} = await chrome.storage.sync.get(['rapidApiKey']);
+    if (!rapidApiKey) {
+      throw new Error('RapidAPI key not configured');
+    }
+
     const url = 'https://gmailnator.p.rapidapi.com/generate-email';
     const options = {
       method: 'POST',
       headers: {
-        'x-rapidapi-key': '028f7b5ec3msh5b533c7952d777fp1072e1jsn63a15bb2aa63',
+        'x-rapidapi-key': rapidApiKey,
         'x-rapidapi-host': 'gmailnator.p.rapidapi.com',
         'Content-Type': 'application/json'
       },

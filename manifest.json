@@ -3,7 +3,7 @@
   "name": "AutoFill",
   "version": "1.0",
   "description": "Automatically fills forms with dummy data",
-  "permissions": ["activeTab", "scripting"],
+  "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["https://gmailnator.p.rapidapi.com/*"],
   "background": {
     "service_worker": "background.js"
