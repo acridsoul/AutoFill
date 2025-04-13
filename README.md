@@ -38,11 +38,6 @@ The extension uses the Gmailnator API with these settings:
 - Chrome Extension Manifest V3
 - Gmailnator API (automatic email generation)
 
-## Screenshots
-
-![Extension Popup](icons/icon128.png)
-*Extension popup interface*
-
 ## License
 
 MIT License - See [LICENSE](LICENSE) file
