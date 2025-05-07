@@ -53,17 +53,15 @@ function generatePassword(options) {
 }
 
 // Function to fill form fields
-function fillFormFields(gender, passwordOptions) {
+function fillFormFields(gender, passwordOptions, password) {
     // Get form fields
     const nameInputs = document.querySelectorAll('input[type="text"], input[name*="name" i]');
     const emailInputs = document.querySelectorAll('input[type="email"], input[name*="email" i]');
     const passwordInputs = document.querySelectorAll('input[type="password"], input[name*="password" i]');
     
     // Generate data
-    const firstName = gender === 'male' ? getRandomMaleName() : getRandomFemaleName();
-    const lastName = getRandomLastName();
-    const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}@example.com`;
-    const password = generatePassword(passwordOptions);
+    const { firstName, lastName } = generateName(gender);
+    const email = generateEmail(firstName, lastName);
     
     // Fill name fields
     nameInputs.forEach(input => {
@@ -117,11 +115,6 @@ function getRandomLastName() {
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'fillForm') {
-        fillFormFields(request.gender, request.passwordOptions);
+        fillFormFields(request.gender, request.passwordOptions, request.password);
     }
-});
-
-// Auto-fill if form is detected
-if (document.querySelector('form')) {
-    fillFormFields('male', { length: 12, useUppercase: true, useSpecial: true });
-} 
+}); 

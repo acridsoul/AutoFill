@@ -73,6 +73,25 @@
         .fill-btn:hover {
             background: #357ABD;
         }
+        .password-display {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .password-input {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .copy-btn {
+            padding: 4px 8px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -95,9 +114,20 @@
                 <input type="checkbox" class="checkbox" id="useUppercase" checked>
             </div>
             <div class="option-row">
+                <label>Numbers</label>
+                <input type="checkbox" class="checkbox" id="useNumbers" checked>
+            </div>
+            <div class="option-row">
                 <label>Special Characters</label>
                 <input type="checkbox" class="checkbox" id="useSpecial" checked>
             </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section-title">Generated Password</div>
+        <div class="password-display">
+            <input type="text" id="generatedPassword" readonly class="password-input">
+            <button class="copy-btn" id="copyPassword">Copy</button>
         </div>
     </div>
     <button class="fill-btn" id="fillForm">Fill Form</button>
