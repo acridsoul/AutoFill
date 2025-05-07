@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background circle -->
+    <circle cx="64" cy="64" r="60" fill="#4A90E2"/>
+    
+    <!-- Form lines -->
+    <rect x="32" y="32" width="64" height="8" rx="4" fill="white"/>
+    <rect x="32" y="48" width="64" height="8" rx="4" fill="white"/>
+    <rect x="32" y="64" width="64" height="8" rx="4" fill="white"/>
+    
+    <!-- Checkmark -->
+    <path d="M88 40L96 48L112 32" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg> 

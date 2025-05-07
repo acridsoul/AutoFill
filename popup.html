@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proton Pass Autofill</title>
+    <style>
+        body {
+            width: 250px;
+            padding: 15px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .section {
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .gender-options {
+            display: flex;
+            gap: 10px;
+        }
+        .gender-btn {
+            flex: 1;
+            padding: 8px;
+            border: 2px solid #4A90E2;
+            border-radius: 4px;
+            background: white;
+            color: #4A90E2;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .gender-btn:hover, .gender-btn.selected {
+            background: #4A90E2;
+            color: white;
+        }
+        .password-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .option-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .option-row label {
+            flex: 1;
+            font-size: 13px;
+        }
+        .length-input {
+            width: 50px;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #4A90E2;
+        }
+        .fill-btn {
+            width: 100%;
+            padding: 8px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .fill-btn:hover {
+            background: #357ABD;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <div class="section-title">Gender</div>
+        <div class="gender-options">
+            <button class="gender-btn selected" data-gender="male">Male</button>
+            <button class="gender-btn" data-gender="female">Female</button>
+        </div>
+    </div>
+    <div class="section">
+        <div class="section-title">Password Options</div>
+        <div class="password-options">
+            <div class="option-row">
+                <label>Length:</label>
+                <input type="number" class="length-input" id="passwordLength" min="8" max="32" value="12">
+            </div>
+            <div class="option-row">
+                <label>Uppercase Letters</label>
+                <input type="checkbox" class="checkbox" id="useUppercase" checked>
+            </div>
+            <div class="option-row">
+                <label>Special Characters</label>
+                <input type="checkbox" class="checkbox" id="useSpecial" checked>
+            </div>
+        </div>
+    </div>
+    <button class="fill-btn" id="fillForm">Fill Form</button>
+    <script src="popup.js"></script>
+</body>
+</html> 
