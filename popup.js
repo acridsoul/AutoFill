@@ -5,10 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const genderButtons = document.querySelectorAll('.gender-btn');
     let selectedGender = 'male';
     let currentPassword = ''; // Store the current password
+    let currentEmail = ''; // Store the current email
 
-    // Password generation function
     function generatePassword(options) {
-        // The old Faker.js version doesn't have the same API, so we need to implement our own
         const lowercase = 'abcdefghijklmnopqrstuvwxyz';
         const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const numbers = '0123456789';
@@ -28,6 +27,53 @@ document.addEventListener('DOMContentLoaded', function() {
         return password;
     }
 
+    // Email generation function using proxy server
+    async function generateEmail() {
+        try {
+            const url = 'https://autofill.githinji.dev/api/generate-email';
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    options: [1, 2, 3] // Using only public options
+                })
+            };
+
+            const generateEmailBtn = document.getElementById('generateEmailBtn');
+            const generatedEmailInput = document.getElementById('generatedEmail');
+            
+            // Update button text to show loading
+            const originalBtnText = generateEmailBtn.textContent;
+            generateEmailBtn.textContent = 'Generating...';
+            generateEmailBtn.disabled = true;
+            
+            const response = await fetch(url, options);
+            const result = await response.json();
+            
+            if (result && result.email) {
+                currentEmail = result.email;
+                generatedEmailInput.value = currentEmail;
+            } else {
+                console.error('Error generating email:', result);
+                alert('Failed to generate email. Please try again.');
+            }
+            
+            // Reset button
+            generateEmailBtn.textContent = originalBtnText;
+            generateEmailBtn.disabled = false;
+            
+            return currentEmail;
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to generate email: ' + error.message);
+            document.getElementById('generateEmailBtn').textContent = 'Generate Email';
+            document.getElementById('generateEmailBtn').disabled = false;
+            return '';
+        }
+    }
+
     genderButtons.forEach(button => {
         button.addEventListener('click', () => {
             genderButtons.forEach(btn => btn.classList.remove('selected'));
@@ -44,6 +90,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const useSpecial = document.getElementById('useSpecial');
     const generatedPassword = document.getElementById('generatedPassword');
     const copyPasswordBtn = document.getElementById('copyPassword');
+    const generatedEmail = document.getElementById('generatedEmail');
+    const copyEmailBtn = document.getElementById('copyEmail');
+    const generateEmailBtn = document.getElementById('generateEmailBtn');
 
     // Function to update password display
     function updatePasswordDisplay() {
@@ -64,6 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
     useNumbers.addEventListener('change', updatePasswordDisplay);
     useSpecial.addEventListener('change', updatePasswordDisplay);
 
+    // Generate email when button is clicked
+    generateEmailBtn.addEventListener('click', async () => {
+        await generateEmail();
+    });
+
     // Copy password to clipboard
     copyPasswordBtn.addEventListener('click', async () => {
         try {
@@ -71,6 +125,19 @@ document.addEventListener('DOMContentLoaded', function() {
             copyPasswordBtn.textContent = 'Copied!';
             setTimeout(() => {
                 copyPasswordBtn.textContent = 'Copy';
+            }, 1500);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+        }
+    });
+
+    // Copy email to clipboard
+    copyEmailBtn.addEventListener('click', async () => {
+        try {
+            await navigator.clipboard.writeText(generatedEmail.value);
+            copyEmailBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyEmailBtn.textContent = 'Copy';
             }, 1500);
         } catch (err) {
             console.error('Failed to copy:', err);
@@ -89,11 +156,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 useSpecial: useSpecial.checked
             };
 
+            // If no email has been generated yet, generate one now
+            if (!currentEmail) {
+                await generateEmail();
+            }
+
+            console.log('Sending to content.js - Email:', currentEmail); // Debug logging
+
             await chrome.tabs.sendMessage(tab.id, {
                 action: 'fillForm',
                 gender: selectedGender,
                 passwordOptions: passwordOptions,
-                password: currentPassword
+                password: currentPassword,
+                email: currentEmail
             });
         } catch (err) {
             console.error('Error sending message:', err);

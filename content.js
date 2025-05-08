@@ -7,11 +7,6 @@ function generateName(gender) {
     return { firstName, lastName };
 }
 
-// Generate email from name
-function generateEmail(firstName, lastName) {
-    return faker.internet.email(firstName, lastName);
-}
-
 // Function to generate a random password based on options
 function generatePassword(options) {
     // The old Faker.js version doesn't have the same API, so we need to implement our own
@@ -35,7 +30,7 @@ function generatePassword(options) {
 }
 
 // Function to fill form fields
-function fillFormFields(gender, passwordOptions, password) {
+function fillFormFields(gender, passwordOptions, password, email) {
     // Get form fields
     const nameInputs = document.querySelectorAll('input[type="text"], input[name*="name" i]');
     const emailInputs = document.querySelectorAll('input[type="email"], input[name*="email" i]');
@@ -43,7 +38,6 @@ function fillFormFields(gender, passwordOptions, password) {
     
     // Generate data
     const { firstName, lastName } = generateName(gender);
-    const email = generateEmail(firstName, lastName);
     
     // Fill name fields
     nameInputs.forEach(input => {
@@ -56,9 +50,10 @@ function fillFormFields(gender, passwordOptions, password) {
         }
     });
     
-    // Fill email fields
+    // Fill email fields with the API-generated email from popup
     emailInputs.forEach(input => {
-        input.value = email;
+        input.value = email || ''; // Use empty string as fallback if email is undefined
+        console.log('Filling email field with:', email); // Debug logging
     });
     
     // Fill password fields
@@ -85,6 +80,7 @@ function getRandomLastName() {
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'fillForm') {
-        fillFormFields(request.gender, request.passwordOptions, request.password);
+        console.log('Received message from popup:', request); // Debug logging
+        fillFormFields(request.gender, request.passwordOptions, request.password, request.email);
     }
 }); 
