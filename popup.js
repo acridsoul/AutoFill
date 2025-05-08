@@ -101,4 +101,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Generate initial password
     updatePasswordDisplay();
+
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Theme handling
+    function setTheme(isDark) {
+        if (isDark) {
+            body.classList.add('dark-mode');
+            body.classList.remove('light-mode');
+            themeToggle.checked = true;
+        } else {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            themeToggle.checked = false;
+        }
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // On load, set theme from localStorage or default
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        setTheme(true);
+    } else {
+        setTheme(false);
+    }
+
+    themeToggle.addEventListener('change', () => {
+        setTheme(themeToggle.checked);
+    });
 }); 

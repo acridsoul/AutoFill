@@ -8,6 +8,46 @@
             padding: 15px;
             font-family: system-ui, -apple-system, sans-serif;
         }
+        body.light-mode {
+            background: #fff;
+            color: #222;
+        }
+        body.dark-mode {
+            background: #23272e;
+            color: #e0e0e0;
+        }
+        body.dark-mode .section-title {
+            color: #aaa;
+        }
+        body.dark-mode .gender-btn {
+            background: #23272e;
+            color: #4A90E2;
+            border-color: #4A90E2;
+        }
+        body.dark-mode .gender-btn.selected,
+        body.dark-mode .gender-btn:hover {
+            background: #4A90E2;
+            color: #fff;
+        }
+        body.dark-mode .length-slider {
+            accent-color: #4A90E2;
+        }
+        body.dark-mode .password-input {
+            background: #181a20;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+        body.dark-mode .fill-btn,
+        body.dark-mode .copy-btn {
+            background: #4A90E2;
+            color: #fff;
+        }
+        body.dark-mode .option-row label {
+            color: #e0e0e0;
+        }
+        body.dark-mode .checkbox {
+            accent-color: #4A90E2;
+        }
         .section {
             margin-bottom: 15px;
         }
@@ -104,9 +144,54 @@
             color: #4A90E2;
             font-weight: bold;
         }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 22px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #4A90E2;
+        }
+        input:checked + .slider:before {
+            transform: translateX(18px);
+        }
     </style>
 </head>
 <body>
+    <div style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 10px;">
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
     <div class="section">
         <div class="section-title">Gender</div>
         <div class="gender-options">
