@@ -1,3 +1,5 @@
+// Using Faker.js from global scope (loaded via script tag in popup.html)
+
 document.addEventListener('DOMContentLoaded', function() {
     // Gender selection
     const genderButtons = document.querySelectorAll('.gender-btn');
@@ -6,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Password generation function
     function generatePassword(options) {
+        // The old Faker.js version doesn't have the same API, so we need to implement our own
         const lowercase = 'abcdefghijklmnopqrstuvwxyz';
         const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const numbers = '0123456789';

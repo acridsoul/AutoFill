@@ -1,28 +1,46 @@
-# Proton Pass Autofill Chrome Extension
+# Autofill Buddy
 
-A Chrome extension that automatically fills registration forms with matching dummy data, including names, emails, and customizable passwords.
+A Chrome extension that autofills registration forms with realistic fake data using Faker.js.
 
 ## Features
 
-- **Gender-based Name Generation**: Generates appropriate first names based on selected gender
-- **Customizable Password Generation**
-- **Smart Form Detection**: Automatically detects and fills common form fields
+- Generate realistic user data (names, emails, passwords)
+- Gender-specific name generation
+- Customizable password options
+- Dark/light theme support
+- Copy generated passwords to clipboard
 
 ## Installation
 
-1. Clone this repository or download the source code
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" in the top right corner
-4. Click "Load unpacked" and select the extension directory
+1. Clone this repository:
+```
+git clone <repository-url>
+```
+
+2. Install dependencies:
+```
+npm install
+```
+
+3. Load the extension in Chrome:
+   - Open Chrome and navigate to `chrome://extensions/`
+   - Enable "Developer mode" by clicking the toggle in the top right
+   - Click "Load unpacked" and select the extension directory
 
 ## Usage
 
-1. Navigate to any website with a registration form
-2. The extension will automatically attempt to fill the form
-3. If automatic filling doesn't work, click the extension icon in your browser toolbar to trigger the filling manually
+1. Navigate to any web page with a registration form
+2. Click the extension icon to open the popup
+3. Select gender and password options
+4. Click "Fill Form" to autofill the form fields
 
+## Development
 
+This extension uses:
+- Faker.js for generating realistic data
+- ES modules for importing dependencies
+- Chrome Extension Manifest V3
 
-## Security Note
+## License
 
-This extension is designed for testing purposes only. The generated data is not stored anywhere and is only used for form filling. 
+MIT 
