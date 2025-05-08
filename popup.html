@@ -92,6 +92,18 @@
             border-radius: 4px;
             cursor: pointer;
         }
+        .length-slider {
+            width: 120px;
+            accent-color: #4A90E2;
+        }
+        #passwordLengthValue {
+            min-width: 24px;
+            display: inline-block;
+            text-align: center;
+            font-size: 13px;
+            color: #4A90E2;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -106,8 +118,9 @@
         <div class="section-title">Password Options</div>
         <div class="password-options">
             <div class="option-row">
-                <label>Length:</label>
-                <input type="number" class="length-input" id="passwordLength" min="8" max="32" value="12">
+                <label for="passwordLength">Length:</label>
+                <input type="range" class="length-slider" id="passwordLength" min="8" max="32" value="12">
+                <span id="passwordLengthValue">12</span>
             </div>
             <div class="option-row">
                 <label>Uppercase Letters</label>

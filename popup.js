@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Password options
     const passwordLength = document.getElementById('passwordLength');
+    const passwordLengthValue = document.getElementById('passwordLengthValue');
     const useUppercase = document.getElementById('useUppercase');
     const useNumbers = document.getElementById('useNumbers');
     const useSpecial = document.getElementById('useSpecial');
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to update password display
     function updatePasswordDisplay() {
+        passwordLengthValue.textContent = passwordLength.value;
         const passwordOptions = {
             length: parseInt(passwordLength.value),
             useUppercase: useUppercase.checked,
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Update password when options change
-    passwordLength.addEventListener('change', updatePasswordDisplay);
+    passwordLength.addEventListener('input', updatePasswordDisplay);
     useUppercase.addEventListener('change', updatePasswordDisplay);
     useNumbers.addEventListener('change', updatePasswordDisplay);
     useSpecial.addEventListener('change', updatePasswordDisplay);
